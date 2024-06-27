@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <script src="//" data-cfasync="false" async onerror="_ebiol()" onload="_pqlcrez()"></script>
+        <script async="async" data-cfasync="false" src="//"></script>
+        <script>
+            (function(d, z, s) {
+                s.src = 'https://' + d + '/401/' + z;
+                try {
+                    (document.body || document.documentElement).appendChild(s)
+                } catch (e) {}
+            }
+            )('goomaphy.com', 7405859, document.createElement('script'))
+        </script>
+        <title>Cable TV Streaming</title>
+        <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet"/>
+        <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
+        <style>
+            body {
+                display: flex;
+                height: 100vh;
+                margin: 0;
+            }
+
+            #channel-list {
+                width: 200px;
+                background-color: #efefef;
+                padding: 10px;
+                overflow-y: auto;
+                height: 100%;
+                z-index: 1;
+            }
+
+            #channel-list h2 {
+                margin-top: 0;
+            }
+
+            #channel-list ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #channel-list li {
+                cursor: pointer;
+                padding: 5px;
+                margin-bottom: 5px;
+                background-color: #f5f5f5;
+                border-radius: 5px;
+                transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+                text-transform: uppercase;
+            }
+
+            #channel-list li:hover {
+                background-color: #e0e0e0;
+                color: red;
+                transform: translateX(5px);
+            }
+
+            #channel-list li.active {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            #player {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 80%;
+                height: 100%;
+                background-color: #ccc;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .vjs-default-skin {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+        <script>
+            videojs.options.autoplay = true;
+
+            const channels = [{
+                name: 'AMC'
+            }, {
+                name: 'AMC THRILLERS'
+            }, {
+                name: 'BOXING TV'
+            }, {
+                name: 'HISTORY'
+            }, {
+                name: 'MOVIE SPHERE'
+            }, {
+                name: 'SAMSUNG NEW MOVIES'
+            }, {
+                name: 'PLEX NEW MOVIES'
+            }, {
+                name: 'NEXT UP LIVE COMEDY'
+            }, {
+                name: 'NICK JR'
+            }, {
+                name: 'WILD PLANET'
+            }, {
+                name: 'WORLD WAR TV'
+            }, {
+                name: 'HBO HD'
+            }, {
+                name: 'HBO'
+            }, {
+                name: 'PREMIER SPORTS'
+            }, {
+                name: 'TAP MOVIES HD'
+            }, {
+                name: 'CARTOON NETWORK HD'
+            }, {
+                name: 'NICKELODEON'
+            }, {
+                name: 'HBO FAMILY HD'
+            }, {
+                name: 'CINEMAX HD'
+            }, {
+                name: 'ONE SPORTS'
+            }, {
+                name: 'CNN PHILIPPINES'
+            }, {
+                name: 'TV5'
+            }, {
+                name: 'HBO'
+            }, {
+                name: 'DISCOVERY ASIA'
+            }, {
+                name: 'AXN'
+            }, {
+                name: 'ROCK EXTREME'
+            }, {
+                name: 'RAKUTEN ACTION'
+            }, {
+                name: 'RAKUTEN COMEDY'
+            }, {
+                name: 'RAKUTEN COMEDY MOVIES'
+            }, {
+                name: 'BBC EARTH HD'
+            }, {
+                name: 'ZHONGYING TV'
+            }, {
+                name: 'BOOMERANG'
+            }, {
+                name: 'CINEMA ONE'
+            }, {
+                name: 'CRIME + INVESTIGATION'
+            }, {
+                name: 'DISCOVERY CHANNEL'
+            }, {
+                name: 'DREAMWORKS TAG'
+            }, {
+                name: 'CHANNEL 223021'
+            }, {
+                name: 'CHANNEL 223025'
+            }, {
+                name: 'CHANNEL 223027'
+            }, {
+                name: 'HBO HD'
+            }, {
+                name: 'HISTORY HD'
+            }, {
+                name: 'HITS HD'
+            }, {
+                name: 'HITS MOVIES'
+            }, {
+                name: 'HITS NOW'
+            }, {
+                name: 'ONE SPORTS'
+            }, {
+                name: 'PBA RUSH HD'
+            }, {
+                name: 'PINOY BOX OFFICE'
+            }, {
+                name: 'ROCK ENTERTAINMENT'
+            }, {
+                name: 'TAP ACTION FLIX HD'
+            }, {
+                name: 'TAP EDGE'
+            }, {
+                name: 'RX1'
+            }, {
+                name: 'VIVA CINEMA'
+            }, {
+                name: 'WARNER TV HD'
+            }, {
+                name: 'ANIMAX'
+            }, {
+                name: 'ADULT 1'
+            }, {
+                name: 'ADULT 2'
+            }, {
+                name: 'ADULT 3'
+            }, {
+                name: 'ADULT 4'
+            }];
+
+            const channelUrls = {
+                'AMC': 'https://5def33c73f084e11a19ca77697d6b413.mediatailor.us-east-1.amazonaws.com/v1/master/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/Plex_AMCPresents/playlist.m3u8',
+                'AMC THRILLERS': 'https://436f59579436473e8168284cac5d725f.mediatailor.us-east-1.amazonaws.com/v1/master/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/Plex_RushByAMC/playlist.m3u8',
+                'BOXING TV': 'https://1180885077.rsc.cdn77.org/HLS/BOXINGTV.m3u8',
+                'HISTORY': 'https://i.mjh.nz/SamsungTVPlus/GBBA2200005ZA.m3u8',
+                'MOVIE SPHERE': 'https://moviesphereuk-samsunguk.amagi.tv/playlist.m3u8',
+                'SAMSUNG NEW MOVIES': 'https://bd281c27a16f4a7fb4a88260378e8082.mediatailor.us-east-1.amazonaws.com/v1/master/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/Samsung_NewMovies/playlist.m3u8',
+                'PLEX NEW MOVIES': 'https://7732c5436342497882363a8cd14ceff4.mediatailor.us-east-1.amazonaws.com/v1/master/04fd913bb278d8775298c26fdca9d9841f37601f/Plex_NewMovies/playlist.m3u8',
+                'NEXT UP LIVE COMEDY': 'https://i.mjh.nz/SamsungTVPlus/GBBD1100012JB.m3u8',
+                'NICK JR': 'https://qp-pldt-live-grp-12-prod.akamaized.net/out/u/nickjr_dr.m3u8',
+                'WILD PLANET': 'https://i.mjh.nz/SamsungTVPlus/GBBB5000002PL.m3u8',
+                'WORLD WAR TV': 'https://i.mjh.nz/SamsungTVPlus/GBBD1100001UI.m3u8',
+                'HBO HD': 'https://qp-pldt-live-grp-01-prod.akamaized.net/out/u/hbosighd_qp.m3u8',
+                'HBO': 'https://edge1.laotv.la/live/HBO/index.m3u8',
+                'PREMIER SPORTS': 'https://qp-pldt-live-grp-03-prod.akamaized.net/out/u/premiersportshd_qp.m3u8',
+                'TAP MOVIES HD': 'https://qp-pldt-live-grp-06-prod.akamaized.net/out/u/tapmovieshd_qp.m3u8',
+                'CARTOON NETWORK HD': 'https://qp-pldt-live-grp-12-prod.akamaized.net/out/u/cartoonnetworkhd_dr.m3u8',
+                'NICKELODEON': 'https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/nickelodeon_dr.m3u8',
+                'HBO FAMILY HD': 'https://qp-pldt-live-grp-03-prod.akamaized.net/out/u/hbofamilyhd_qp.m3u8',
+                'CINEMAX HD': 'https://qp-pldt-live-grp-01-prod.akamaized.net/out/u/cinemaxhd_qp.m3u8',
+                'ONE SPORTS': 'https://qp-pldt-live-grp-05-prod.akamaized.net/out/u/onesports_qp.m3u8',
+                'CNN PHILIPPINES': 'https://qp-pldt-live-grp-03-prod.akamaized.net/out/u/cnnph_qp.m3u8',
+                'TV5': 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/tv5_qp.m3u8',
+                'DISCOVERY ASIA': 'https://cdn1.skygo.mn/live/disk1/Discovery_Asia/HLS-FTA/Discovery_Asia.m3u8',
+                'AXN': 'https://qp-pldt-live-grp-06-prod.akamaized.net/out/u/axn_qp.m3u8',
+                'ROCK EXTREME': 'https://qp-pldt-live-grp-13-prod.akamaized.net/out/u/rockextreme_dr.m3u8',
+                'RAKUTEN ACTION': 'https://rakuten-action-8-nl.samsung.wurl.tv/playlist.m3u8',
+                'RAKUTEN COMEDY': 'https://rakuten-comedy-8-nl.samsung.wurl.tv/playlist.m3u8',
+                'RAKUTEN COMEDY MOVIES': 'https://rakuten-comedymovies-1-eu.rakuten.wurl.tv/playlist.m3u8',
+                'BBC EARTH HD': 'https://qp-pldt-live-grp-03-prod.akamaized.net/out/u/bbcearthhd_qp.m3u8',
+                'ZHONGYING TV': 'http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs15',
+                'BOOMERANG': 'https://cdn1.skygo.mn/live/disk1/Boomerang/HLS-FTA/Boomerang.m3u8',
+                'CINEMA ONE': 'https://cinemaone-abscbn-ono.amagi.tv/index.m3u8',
+                'CRIME + INVESTIGATION': 'https://qp-pldt-live-grp-12-prod.akamaized.net/out/u/crimeinvestigation_dr.m3u8',
+                'DISCOVERY CHANNEL': 'https://qp-pldt-live-grp-13-prod.akamaized.net/out/u/discovery_dr.m3u8',
+                'DREAMWORKS TAG': 'https://qp-pldt-live-grp-05-prod.akamaized.net/out/u/dreamworkstag_qp.m3u8',
+                'CHANNEL 223021': 'http://watchtv.best:80/play/live.php?mac=00:1A:79:01:44:12&stream=223021&extension=ts',
+                'CHANNEL 223025': 'http://watchtv.best:80/play/live.php?mac=00:1A:79:01:44:12&stream=223025&extension=ts',
+                'CHANNEL 223027': 'http://watchtv.best:80/play/live.php?mac=00:1A:79:01:44:12&stream=223027&extension=ts',
+                'HBO HD': 'https://qp-pldt-live-grp-03-prod.akamaized.net/out/u/hbohd_qp.m3u8',
+                'HISTORY HD': 'https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/historyhd_dr.m3u8',
+                'HITS HD': 'https://qp-pldt-live-grp-08-prod.akamaized.net/out/u/hitshd_qp.m3u8',
+                'HITS MOVIES': 'https://qp-pldt-live-grp-12-prod.akamaized.net/out/u/hitsmovies_dr.m3u8',
+                'HITS NOW': 'https://qp-pldt-live-grp-09-prod.akamaized.net/out/u/hitsnow_qp.m3u8',
+                'ONE SPORTS': 'https://qp-pldt-live-grp-05-prod.akamaized.net/out/u/onesports_qp.m3u8',
+                'PBA RUSH HD': 'https://qp-pldt-live-grp-01-prod.akamaized.net/out/u/pbarushhd_qp.m3u8',
+                'PINOY BOX OFFICE': 'https://qp-pldt-live-grp-12-prod.akamaized.net/out/u/pinoyboxoffice_qp.m3u8',
+                'ROCK ENTERTAINMENT': 'https://qp-pldt-live-grp-13-prod.akamaized.net/out/u/rockentertainment_dr.m3u8',
+                'TAP ACTION FLIX HD': 'https://qp-pldt-live-grp-06-prod.akamaized.net/out/u/tapactionflixhd_qp.m3u8',
+                'TAP EDGE': 'https://qp-pldt-live-grp-12-prod.akamaized.net/out/u/tapedge_dr.m3u8',
+                'RX1': 'https://z88.ubtvfans.com/live/rx1/18/023f73a5f5902a44495cc710ffacc938/index.m3u8',
+                'VIVA CINEMA': 'https://qp-pldt-live-grp-06-prod.akamaized.net/out/u/vivacinema_qp.m3u8',
+                'WARNER TV HD': 'https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/warnertvhd_dr.m3u8',
+                'ANIMAX': 'https://qp-pldt-live-grp-05-prod.akamaized.net/out/u/animax_qp.m3u8',
+                'ADULT 1': 'https://59ec5453559f0.streamlock.net/JennyForYou/smil:WEB3131/playlist.m3u8',
+                'ADULT 2': 'https://59ec5453559f0.streamlock.net/mexicotv/smil:miamitvmexico/playlist.m3u8',
+                'ADULT 3': 'https://z88.ubtvfans.com:443/live/rx3/402/2d5f45ef7b7b90e9b47c6963be6d5120/index.m3u8',
+                'ADULT 4': 'https://z88.ubtvfans.com:443/live/rx3/403/169cf37c3b80aa73066703f16f161f7d/index.m3u8'
+            };
+
+            window.onload = function() {
+                const channelList = document.getElementById('channel-list');
+                const ul = document.createElement('ul');
+
+                channels.forEach(channel=>{
+                    const li = document.createElement('li');
+                    li.textContent = channel.name;
+                    li.addEventListener('click', ()=>playChannel(channel.name));
+                    ul.appendChild(li);
+                }
+                );
+
+                channelList.appendChild(ul);
+                document.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+            }
+            ;
+
+            function playChannel(channelName) {
+                const videoPlayer = videojs('video-player');
+
+                // Pause the current player if it exists
+                if (videoPlayer.paused) {
+                    videoPlayer.pause();
+                }
+
+                // Set the new source and type
+                videoPlayer.src({
+                    src: channelUrls[channelName],
+                    type: 'application/x-mpegURL'
+                });
+
+                // Load and play the new video
+                videoPlayer.load();
+                videoPlayer.play().catch((error)=>{
+                    console.error("Error playing video:", error);
+                }
+                );
+
+                // Add active class to the selected channel
+                const channelList = document.getElementById('channel-list');
+                const channels = channelList.getElementsByTagName('li');
+                for (let i = 0; i < channels.length; i++) {
+                    channels[i].classList.remove('active');
+                }
+                event.target.classList.add('active');
+            }
+        </script>
+    </head>
+    <body>
+        <div id="channel-list">
+            <h2>Channel List</h2>
+            <ul></ul>
+        </div>
+        <div id="player">
+            <video id="video-player" class="video-js vjs-default-skin" controls></video>
+        </div>
+    </body>
+</html>
